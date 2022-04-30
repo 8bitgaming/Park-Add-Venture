@@ -9,7 +9,16 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        savePark: 
+        savePark: (
+            parkId: String!
+            parkName: String
+            description: String
+            image: String
+            link: String
+            visited: Boolean
+            dateVisited: String
+            ): User
+        removePark(parkId: String): User
     },
     type User {
         _id: ID
@@ -20,7 +29,7 @@ const typeDefs = gql`
         savedParks: [Park]
     },
     type Park {
-        parkID: String!
+        parkId: String!
         parkName: String
         description: String
         image: String
