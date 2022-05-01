@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&family=Shrikhand&display=swap');
+
+.header {
+  font-family: 'Shrikhand', cursive;
+}
+
+a .header-links .nav-link {
+  color: #411507;
+}
