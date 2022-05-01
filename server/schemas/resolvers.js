@@ -1,3 +1,4 @@
+const {User} = require('../models')
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -16,8 +17,8 @@ const resolvers = {
         },
     },
     Mutation: {
-        login: async (parent, { email, password }) => {
-            const user = await User.findOne({ email });
+        login: async (parent, { username, password }) => {
+            const user = await User.findOne({ username });
 
             if (!user) {
                 throw new AuthenticationError('Incorrect credentials');
@@ -39,7 +40,28 @@ const resolvers = {
 
             return { token, user };
         },
-        
+        savePark: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { savedParks: { ...args, parkId: args.parkId} } },
+                    { new: true, runValidators: true }
+                );
+                return updatedUser
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        removePark: async (parent, { parkId }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedParks: { parkId: parkId } } },
+                    { new: true }
+                );
+                return updatedUser
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        }
 
     }
 };
