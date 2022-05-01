@@ -1,9 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&family=Shrikhand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
 
 .header {
-  font-family: 'Shrikhand', cursive;
+  font-family: 'Teko', sans-serif;
+  background-color: #CAEBF1;
+  font-size: 24px;
 }
 
-a .header-links .nav-link {
-  color: #411507;
+.header-links {
+  color: #411507 !important;
+}
+
+.header-links:hover {
+  color: #F1B50C !important;
+}
+
+.logo {
+  width: 14rem;
 }
