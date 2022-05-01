@@ -17,16 +17,7 @@ const UserSchema = new Schema(
             required: 'Email is Required',
             match: [/.+@.+\..+/]
         },
-        thoughts: {
-            type: Schema.Types.Array,
-            ref: 'Thought',
-            required: false
-        },
-        friends: {
-            type: Schema.Types.Array,
-            ref: 'User',
-            required: false
-        }
+      
     },
     {
         toJSON: {
