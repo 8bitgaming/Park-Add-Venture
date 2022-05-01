@@ -8,10 +8,10 @@ const myParks = ({}) => {
   //   if (!id.length) return <h3>No Parks Saved or Visited</h3>;
 
   return (
-    <Container fluid>
+    <Container className="container-fluid d-flex justify-content-center mt-10">
         <Row>
             <Col>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem"}}>
         <Card.Img variant="top" src="" />
         <Card.Body>
           <Card.Title>Yellowstone</Card.Title>
