@@ -1,5 +1,6 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../../images/partiallogo.PNG";
+import logo from "../../images/logo.png";
 import "./header.css";
 
 const Header = () => {
@@ -8,6 +9,7 @@ const Header = () => {
       <Container>
         <Navbar.Brand href="#home">
           <img src={logo} alt="Park-Add-Venture logo" />
+          <img src={logo} alt="Park-Add-Venture logo" className="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
