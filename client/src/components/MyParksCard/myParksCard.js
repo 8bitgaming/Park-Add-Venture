@@ -1,28 +1,46 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { Container, Row, Col } from "react-bootstrap";
-import visitedStamp from '../../images/visitedStampRotated.png'
+import visitedStamp from "../../images/visitedStampRotated.png";
+import yellowstone from "../../images/placeholder-yellowstone.jpg";
+import "./myParksCard.css";
 
-const MyParksCard = ({}) => {
+const MyParksCard = ({ savedParks }) => {
   //   if (!id.length) return <h3>No Parks Saved or Visited</h3>;
 
+  //need to add ternary to switch between visited or not visited
   return (
-    <Container className="container-fluid d-flex justify-content-center mt-10">
-        <Row>
-            <Col>
-      <Card style={{ width: "18rem"}}>
-        <Card.Body className="yellow-background">
-          <Card.Title>Yellowstone</Card.Title>
-          <Card.Img variant="top" src={visitedStamp} style={{ width: "5rem", height: "5rem" }} />
-          <Card.Text>Visited!</Card.Text>
-        </Card.Body>
-        <Card.Body>
-          <Button variant="primary">Edit</Button>{" "}
-        </Card.Body>
-      </Card>
-      </Col>
+    <Container className="container-fluid d-flex justify-content-center mt-10 my-parks-page">
+      <Row>
+        <Col>
+          <Card style={{ width: "18rem" }}>
+            <Card.Img
+              variant="top"
+              src={yellowstone}
+              style={{ width: "17.9rem", height: "14rem" }}
+            />
+            <Card.Body className="yellow-background">
+              <Card.Title className="text-center">Yellowstone</Card.Title>
+              <Card.Img
+                      className="stamp"
+                      src={visitedStamp}
+                      style={{ width: "6rem", height: "6rem" }}
+                    />
+              <Container>
+                <Row>
+                  <Col>
+                    <Card.Text>Visited on 7/25/2021</Card.Text>
+                  </Col>
+                  <Col>
+                  <Button variant="success">Edit</Button>{" "}
+                  </Col>
+                </Row>
+              </Container>
+
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
     </Container>
   );

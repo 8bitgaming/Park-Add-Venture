@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
+
+.my-parks-page {
+    background-color: #CAEBF1;
+    font-family: 'Roboto', sans-serif;
+    color: #411507;
+}
+
+.stamp {
+    position: absolute;
+    left: 65%;
+    bottom: 70%;
+}
