@@ -1,14 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import "../../App.css";
+import { Container } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Donation = () => {
 
-    const [checkout, setCheckOut] = useState(false);
 
     const store = useRef();
 
     useEffect(() => {
-        window.store.Buttons({
+        window.paypal.Buttons({
             createOrder: (data, actions, err) => {
                 return actions.order.create({
                     intent: "CAPTURE",
@@ -23,10 +24,6 @@ const Donation = () => {
                     ],
                 });
             },
-            onApprove: async (data, actions) => {
-                const order = await actions.order.catputre()
-                console.log(order);
-            },
             onError: (err) => {
                 console.log(err)
             },
@@ -34,15 +31,9 @@ const Donation = () => {
     }, [])
 
     return (
-        <div ref={store}>
-            <button
-                onClick={() => {
-                    setCheckOut(true);
-                }}
-            >
-                Checkout
-            </button>
-        </div>
+        <Container ref={store} className="container-fluid d-flex justify-content-center" />
+            
+      
     )
 }
 
