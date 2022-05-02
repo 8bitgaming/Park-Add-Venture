@@ -48,8 +48,6 @@ const Homepage = () => {
       <Row xs={1} md={3} lg={4} xxl={5} className="g-4 card-container">
         {nationalParks.filter((park) =>
         park.name.toLowerCase().includes(query)
-        //park.description.toLowerCase().includes(query)
-        //park.states.toLowerCase().includes(query)
         ).map((park) => (
           <ParkCard key={park.id} {...park} />
         ))}
