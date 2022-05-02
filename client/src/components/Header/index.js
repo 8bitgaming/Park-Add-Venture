@@ -21,7 +21,7 @@ const Header = () => {
             </Nav.Link>
             <Nav.Link className="header-links">My Parks</Nav.Link>
             <Nav.Link className="header-links" href="#link">
-              Get Pass
+              Donation
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
