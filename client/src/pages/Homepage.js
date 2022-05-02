@@ -36,13 +36,15 @@ const Homepage = () => {
           to add to a list of parks you would like to add to a personal list to
           visit in the future.
         </p>
-      </div>
-      <input
+        <br></br>
+        <input
         type="text"
         placeholder="Search..."
-        className=""
+        className="g-4 card-container"
         onChange={(e) => setQuery(e.target.value.toLowerCase())}
         />
+      </div>
+      
       <Row xs={1} md={3} lg={4} xxl={5} className="g-4 card-container">
         {nationalParks.filter((park) =>
         park.name.toLowerCase().includes(query)
