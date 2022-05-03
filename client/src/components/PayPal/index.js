@@ -15,7 +15,7 @@ const Donation = () => {
      .create({
        purchase_units: [
          {
-           description: "Sunflower",
+           description: "Donation",
            amount: {
              currency_code: "USD",
              value: 2,
