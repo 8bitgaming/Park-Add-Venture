@@ -1,7 +1,15 @@
 import { Card, Accordion, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-const ParkCard = ({ description, name, states, url, images }) => {
+import { faCirclePlus, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+const ParkCard = ({ description, name, states, url, images, id }) => {
+  const [parkIcon, setIcon] = useState(faCirclePlus);
+  const addPark = (event) => {
+    console.log(`${id} was added`);
+    setIcon(faCircleCheck);
+    event.target.style.color = "#698E1C";
+  };
+
   return (
     <Col className="container-fluid d-flex justify-content-center">
       <Card style={{ width: "18rem" }}>
@@ -11,9 +19,9 @@ const ParkCard = ({ description, name, states, url, images }) => {
             src={images[0].url}
             style={{ width: "17.9rem", height: "14rem" }}
           />
-          <div className="btn">
-            <FontAwesomeIcon icon={faCirclePlus} size="2x" />
-          </div>
+          <button className="btn" onClick={addPark}>
+            <FontAwesomeIcon icon={parkIcon} size="2x" />
+          </button>
         </div>
         <Card.Body className="yellow-background">
           <Accordion flush>

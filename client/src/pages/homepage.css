@@ -28,6 +28,8 @@
     top: 0;
     right: 0;
     color: #411507;
+    stroke: white;
+    stroke-width: 15px;
 }
 
 @media only screen and (min-width: 1200px) {
