@@ -6,7 +6,7 @@ import Auth from '../utils/auth';
 
 const SignupForm = () => {
     // set initial form state
-    const [userFormData, setUserFormData] = useState({ username: '', password: '' });
+    const [userFormData, setUserFormData] = useState({ username: '', firstName: '', lastName:'', email:'',  password: '' });
     // set state for form validation
     const [validated] = useState(false);
     // set state for alert
@@ -79,7 +79,45 @@ const SignupForm = () => {
                     <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
                 </Form.Group>
 
-               
+                <Form.Group>
+                    <Form.Label htmlFor='email'>Email</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Email'
+                        name='email'
+                        onChange={handleInputChange}
+                        value={userFormData.email}
+                        required
+                    />
+                    <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label htmlFor='firstName'>First Name</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='First Name'
+                        name='firstName'
+                        onChange={handleInputChange}
+                        value={userFormData.firstName}
+                        required
+                    />
+                    <Form.Control.Feedback type='invalid'>First name is required!</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label htmlFor='lastName'>Last Name</Form.Label>
+                    <Form.Control
+                        type='text'
+                        placeholder='Last Name'
+                        name='lastName'
+                        onChange={handleInputChange}
+                        value={userFormData.lastName}
+                        required
+                    />
+                    <Form.Control.Feedback type='invalid'>Last name is required!</Form.Control.Feedback>
+                </Form.Group>
+ 
                 <Form.Group>
                     <Form.Label htmlFor='password'>Password</Form.Label>
                     <Form.Control
