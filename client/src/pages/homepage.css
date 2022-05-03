@@ -19,6 +19,17 @@
     background-color: #F1B50C;
 }
 
+.image-container {
+    position: relative;
+}
+
+.image-container .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #411507;
+}
+
 @media only screen and (min-width: 1200px) {
     .mobile {
         display: none;

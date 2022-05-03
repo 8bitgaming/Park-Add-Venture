@@ -1,14 +1,20 @@
 import { Card, Accordion, Col } from "react-bootstrap";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 const ParkCard = ({ description, name, states, url, images }) => {
   return (
     <Col className="container-fluid d-flex justify-content-center">
       <Card style={{ width: "18rem" }}>
-        <Card.Img
-          variant="top"
-          src={images[0].url}
-          style={{ width: "17.9rem", height: "14rem" }}
-        />
+        <div className="image-container">
+          <Card.Img
+            variant="top"
+            src={images[0].url}
+            style={{ width: "17.9rem", height: "14rem" }}
+          />
+          <div className="btn">
+            <FontAwesomeIcon icon={faCirclePlus} size="2x" />
+          </div>
+        </div>
         <Card.Body className="yellow-background">
           <Accordion flush>
             <Accordion.Item eventKey="1">
