@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { SIGNUP_USER } from '../utils/API';
+import { SIGNUP_USER } from '../utils/mutation';
 import Auth from '../utils/auth';
 
 const SignupForm = () => {

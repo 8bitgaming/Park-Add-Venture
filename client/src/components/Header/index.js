@@ -26,7 +26,7 @@ const Header = () => {
             <Nav.Link className="header-links" href="#link">
               Get Pass
             </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/LoginForm">
+            <Nav.Link className="header-links" as={Link} to="/Login">
               Login
             </Nav.Link>
             <Nav.Link className="header-links" as={Link} to="/Signup">
