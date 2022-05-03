@@ -1,6 +1,6 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Col, Card } from 'react-bootstrap';
 
 import { LOGIN_USER } from '../utils/mutation';
 import auth from '../utils/auth';
@@ -48,7 +48,14 @@ const LoginForm = () => {
     };
 
     return (
-        <>
+        <div className='homepage'>
+        <Col className="container-fluid d-flex justify-content-center">
+        <Card className='yellow-background' style={{ width: "18rem" }}>
+            <Card.Img
+            variant="top"
+            src={require('../images/login.png')}
+            />
+            <Card.Body>
             <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
                 <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
                     Something went wrong with your login credentials!
@@ -85,7 +92,10 @@ const LoginForm = () => {
                     Submit
                 </Button>
             </Form>
-        </>
+            </Card.Body>
+        </Card>
+        </Col>
+        </div>
     );
 };
 
