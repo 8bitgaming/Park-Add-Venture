@@ -3,10 +3,9 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Container, Row, Col } from "react-bootstrap";
 import visitedStamp from "../../images/visitedStampRotated.png";
-import yellowstone from "../../images/placeholder-yellowstone.jpg";
 import "./myParksCard.css";
 
-const MyParksCard = ({ savedParks }) => {
+const MyParksCard = ({ parkName, image, link, visited, dateVisited }) => {
   //   if (!id.length) return <h3>No Parks Saved or Visited</h3>;
 
   //need to add ternary to switch between visited or not visited
@@ -17,11 +16,11 @@ const MyParksCard = ({ savedParks }) => {
           <Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
-              src={yellowstone}
+              src={image}
               style={{ width: "17.9rem", height: "14rem" }}
             />
             <Card.Body className="yellow-background">
-              <Card.Title className="text-center">Yellowstone</Card.Title>
+              <Card.Title className="text-center">{parkName}</Card.Title>
               <Card.Img
                       className="stamp"
                       src={visitedStamp}
