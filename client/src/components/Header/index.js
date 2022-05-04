@@ -21,15 +21,8 @@ const Header = () => {
             <Nav.Link className="header-links" as={Link} to="/">
               Parks
             </Nav.Link>
-            <Nav.Link className="header-links" href="#link">
-              Profile
-            </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/myparks"
-            >My Parks
-            </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/donation">
-              Donation
-            </Nav.Link>
+            
+            
             {!AuthService.loggedIn()? (
               <React.Fragment>
               <Nav.Link key={0} className="header-links" as={Link} to="/Login">
@@ -40,9 +33,18 @@ const Header = () => {
               </Nav.Link>
               </React.Fragment>
             ) : (
-              <Nav.Link onClick={AuthService.logout}>Logout</Nav.Link>
+              <React.Fragment>
+              <Nav.Link className="header-links" as={Link} to="/myparks">
+                My Parks
+              </Nav.Link>
+              <Nav.Link onClick={AuthService.logout}>
+                Logout
+              </Nav.Link>
+              </React.Fragment>
             )}
-              
+              <Nav.Link className="header-links" as={Link} to="/donation">
+              Donation
+            </Nav.Link>
             
           </Nav>
         </Navbar.Collapse>
