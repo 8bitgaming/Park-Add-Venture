@@ -3,6 +3,7 @@ import logo from "../../images/logo.png";
 import "./header.css";
 import { Link } from "react-router-dom";
 import AuthService from '../../utils/auth';
+import React from "react";
 
 
 
@@ -29,19 +30,17 @@ const Header = () => {
             <Nav.Link className="header-links" as={Link} to="/donation">
               Donation
             </Nav.Link>
-            {AuthService.loggedIn()? (
-              <>
-              <Button onClick={AuthService.logout()}>Logout</Button>
-              </>
+            {!AuthService.loggedIn()? (
+              <React.Fragment>
+              <Nav.Link key={0} className="header-links" as={Link} to="/Login">
+                Login
+              </Nav.Link>
+              <Nav.Link key={1} className="header-links" as={Link} to="/Signup">
+                Signup
+              </Nav.Link>
+              </React.Fragment>
             ) : (
-              <>
-            <Nav.Link key={0} className="header-links" as={Link} to="/Login">
-              Login
-            </Nav.Link>
-            <Nav.Link key={1} className="header-links" as={Link} to="/Signup">
-              Signup
-            </Nav.Link>
-            </>
+              <Nav.Link onClick={AuthService.logout}>Logout</Nav.Link>
             )}
               
             
