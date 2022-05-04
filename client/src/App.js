@@ -14,6 +14,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Donation from "./components/PayPal";
+import { Button } from "react-bootstrap";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -35,12 +36,14 @@ const client = new ApolloClient({
 });
 
 
+
+
 function App() {
   return (
     <ApolloProvider client={client}>
     <Router>
       <>
-        <Header />
+        <Header/>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/myparks" element={<MyParks />} />

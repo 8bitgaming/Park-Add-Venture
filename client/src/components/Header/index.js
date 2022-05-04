@@ -1,10 +1,13 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import logo from "../../images/logo.png";
 import "./header.css";
 import { Link } from "react-router-dom";
+import AuthService from '../../utils/auth';
+
+
 
 const Header = () => {
- 
+
   return (
     <Navbar className="header" expand="lg">
       <Container>
@@ -26,12 +29,20 @@ const Header = () => {
             <Nav.Link className="header-links" as={Link} to="/donation">
               Donation
             </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/Login">
+            {AuthService.loggedIn()? (
+              <>
+              <Button onClick={AuthService.logout()}>Logout</Button>
+              </>
+            ) : (
+              <>
+            <Nav.Link key={0} className="header-links" as={Link} to="/Login">
               Login
             </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/Signup">
+            <Nav.Link key={1} className="header-links" as={Link} to="/Signup">
               Signup
             </Nav.Link>
+            </>
+            )}
               
             
           </Nav>
