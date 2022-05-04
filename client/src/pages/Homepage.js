@@ -1,5 +1,5 @@
 import ParkCard from "../components/ParkCard";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import "./homepage.css";
 import { Row } from "react-bootstrap";
 
@@ -17,6 +17,8 @@ const Homepage = () => {
   const nationalParks = parks.filter(
     (park) => park.designation === "National Park"
   );
+  const [query, setQuery] = useState("");
+ 
   return (
     <div className="homepage">
       <div className="text-center pb-5">
@@ -34,10 +36,19 @@ const Homepage = () => {
           to add to a list of parks you would like to add to a personal list to
           visit in the future.
         </p>
+        <br></br>
+        <input
+        type="text"
+        placeholder="Search..."
+        className="g-4 card-container"
+        onChange={(e) => setQuery(e.target.value.toLowerCase())}
+        />
       </div>
-
+      
       <Row xs={1} md={3} lg={4} xxl={5} className="g-4 card-container">
-        {nationalParks.map((park) => (
+        {nationalParks.filter((park) =>
+        park.name.toLowerCase().includes(query)
+        ).map((park) => (
           <ParkCard key={park.id} {...park} />
         ))}
       </Row>
