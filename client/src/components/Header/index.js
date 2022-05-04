@@ -4,6 +4,7 @@ import "./header.css";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+ 
   return (
     <Navbar className="header" expand="lg">
       <Container>
@@ -22,9 +23,17 @@ const Header = () => {
             <Nav.Link className="header-links" as={Link} to="/myparks"
             >My Parks
             </Nav.Link>
-            <Nav.Link className="header-links" href="#link">
-              Get Pass
+            <Nav.Link className="header-links" as={Link} to="/donation">
+              Donation
             </Nav.Link>
+            <Nav.Link className="header-links" as={Link} to="/Login">
+              Login
+            </Nav.Link>
+            <Nav.Link className="header-links" as={Link} to="/Signup">
+              Signup
+            </Nav.Link>
+              
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
