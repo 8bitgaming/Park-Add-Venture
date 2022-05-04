@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
 
+body {
+    background-color: #CAEBF1;
+    font-family: 'Roboto', sans-serif;
+    color: #411507;
+}
+
 .desktop {
     display: none;
 }
@@ -7,12 +13,6 @@
 .mobile {
     padding-left: 35px;
     padding-right: 35px;
-}
-
-.homepage {
-    background-color: #CAEBF1;
-    font-family: 'Roboto', sans-serif;
-    color: #411507;
 }
 
 .yellow-background, .accordion-button {
