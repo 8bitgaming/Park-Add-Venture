@@ -1,10 +1,14 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import logo from "../../images/logo.png";
 import "./header.css";
 import { Link } from "react-router-dom";
+import AuthService from '../../utils/auth';
+import React from "react";
+
+
 
 const Header = () => {
- 
+
   return (
     <Navbar className="header" expand="lg">
       <Container>
@@ -17,22 +21,30 @@ const Header = () => {
             <Nav.Link className="header-links" as={Link} to="/">
               Parks
             </Nav.Link>
-            <Nav.Link className="header-links" href="#link">
-              Profile
-            </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/myparks"
-            >My Parks
-            </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/donation">
+            
+            
+            {!AuthService.loggedIn()? (
+              <React.Fragment>
+              <Nav.Link key={0} className="header-links" as={Link} to="/Login">
+                Login
+              </Nav.Link>
+              <Nav.Link key={1} className="header-links" as={Link} to="/Signup">
+                Signup
+              </Nav.Link>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+              <Nav.Link className="header-links" as={Link} to="/myparks">
+                My Parks
+              </Nav.Link>
+              <Nav.Link onClick={AuthService.logout}>
+                Logout
+              </Nav.Link>
+              </React.Fragment>
+            )}
+              <Nav.Link className="header-links" as={Link} to="/donation">
               Donation
             </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/Login">
-              Login
-            </Nav.Link>
-            <Nav.Link className="header-links" as={Link} to="/Signup">
-              Signup
-            </Nav.Link>
-              
             
           </Nav>
         </Navbar.Collapse>
