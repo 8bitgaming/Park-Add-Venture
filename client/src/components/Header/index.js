@@ -23,8 +23,8 @@ const Header = () => {
             <Nav.Link className="header-links" as={Link} to="/myparks"
             >My Parks
             </Nav.Link>
-            <Nav.Link className="header-links" href="#link">
-              Get Pass
+            <Nav.Link className="header-links" as={Link} to="/donation">
+              Donation
             </Nav.Link>
             <Nav.Link className="header-links" as={Link} to="/Login">
               Login

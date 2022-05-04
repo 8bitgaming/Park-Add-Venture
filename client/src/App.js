@@ -13,6 +13,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import Donation from "./components/PayPal";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -33,6 +34,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -44,6 +46,8 @@ function App() {
           <Route path="/myparks" element={<MyParks />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/Signup" element={<SignupForm />} />
+          <Route path="/donation" element={<Donation />} />
+          {/* <Route path="/myparks:id" element={<MyParks />} /> REPLACE WITH :ID VERSION ONCE GRAPHQL IN PLACE*/}
         </Routes>
         
       </>
