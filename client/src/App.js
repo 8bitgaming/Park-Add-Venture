@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import MyParks from "./pages/MyParks"
+import Donation from "./components/PayPal";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/myparks" element={<MyParks />} />
+          <Route path="/donation" element={<Donation />} />
           {/* <Route path="/myparks:id" element={<MyParks />} /> REPLACE WITH :ID VERSION ONCE GRAPHQL IN PLACE*/}
         </Routes>
       </>
