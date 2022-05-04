@@ -19,7 +19,7 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
             src={images[0].url}
             style={{ width: "17.9rem", height: "14rem" }}
           />
-          <button className="btn" onClick={addPark}>
+          <button className="btn btn-no-shadow" onClick={addPark}>
             <FontAwesomeIcon icon={parkIcon} size="2x" />
           </button>
         </div>
