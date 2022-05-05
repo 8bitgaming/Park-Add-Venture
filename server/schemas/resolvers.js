@@ -61,7 +61,18 @@ const resolvers = {
                 return updatedUser
             }
             throw new AuthenticationError('You need to be logged in!');
-        }
+        },
+        updatePark: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id, 'savedParks.parkId': args.parkId },
+                    { $set: { 'savedParks.$.visited': args.visited, 'savedParks.$.dateVisited': args.dateVisited} },
+                    { new: true, runValidators: true }
+                );
+                return updatedUser
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
 
     }
 };

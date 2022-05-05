@@ -18,6 +18,15 @@ const typeDefs = gql`
             visited: Boolean
             dateVisited: String
             ): User
+        updatePark(
+            parkId: String!
+            parkName: String
+            description: String
+            image: String
+            link: String
+            visited: Boolean
+            dateVisited: String
+            ): User
         removePark(parkId: String): User
     }
     type User {
