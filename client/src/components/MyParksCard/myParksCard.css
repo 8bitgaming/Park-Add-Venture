@@ -10,6 +10,7 @@ body {
     background-color: #CAEBF1;
     font-family: 'Roboto', sans-serif;
     color: #411507;
+    width: 100vw !important;
 }
 
 .desktop {
