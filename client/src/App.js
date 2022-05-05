@@ -46,7 +46,6 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/Signup" element={<SignupForm />} />
             <Route path="/donation" element={<Donation />} />
-            {/* <Route path="/myparks:id" element={<MyParks />} /> REPLACE WITH :ID VERSION ONCE GRAPHQL IN PLACE*/}
           </Routes>
         </>
       </Router>
