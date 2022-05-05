@@ -55,3 +55,12 @@ export const SAVE_PARK = gql`
     }
   }
 `;
+
+export const DELETE_PARK = gql`
+  mutation deletePark(
+      $parkId: String!
+  )
+  deletePark(parkId: $parkId) {
+      
+  }
+`;
