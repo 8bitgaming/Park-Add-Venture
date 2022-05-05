@@ -4,49 +4,44 @@ import { Form, Button, Alert, Col, Card } from 'react-bootstrap';
 
 import { LOGIN_USER } from '../utils/mutation';
 import auth from '../utils/auth';
+import { useMutation } from '@apollo/client';
 
-const LoginForm = () => {
-    const [userFormData, setUserFormData] = useState({ username: '', password: '' });
+const Login = (props) => {
+    const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+    // set state for form validation
     const [validated] = useState(false);
+    // set state for alert
     const [showAlert, setShowAlert] = useState(false);
+    const [login, { error }] = useMutation(LOGIN_USER);
 
+    // update state based on form input changes
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setUserFormData({ ...userFormData, [name]: value });
+
+      
     };
 
+    // submit form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        // check if form has everything (as per react-bootstrap docs)
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
         try {
-            const response = await LOGIN_USER(userFormData);
+            const { data } = await login({
+                variables: { ...userFormData },
+            });
 
-            if (!response.ok) {
-                throw new Error('something went wrong!');
-            }
-
-            const { token, user } = await response.json();
-            console.log(user);
-            auth.login(token);
-        } catch (err) {
-            console.error(err);
-            setShowAlert(true);
+            auth.login(data.login.token);
+        } catch (e) {
+            console.error(e);
         }
 
+        // clear form values
         setUserFormData({
-            username: '',
             email: '',
             password: '',
         });
     };
-
     return (
         <div className='homepage'>
         <Col className="container-fluid d-flex justify-content-center">
@@ -86,10 +81,12 @@ const LoginForm = () => {
                     <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
                 </Form.Group>
                 <Button
-                    disabled={!(userFormData.email && userFormData.password)}
+                            
+                    enabled={!(userFormData.email && userFormData.password)}
                     type='submit'
                     variant='success'>
                     Submit
+                    
                 </Button>
             </Form>
             </Card.Body>
@@ -99,4 +96,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default Login;
