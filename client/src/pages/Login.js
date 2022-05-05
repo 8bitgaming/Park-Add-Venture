@@ -89,6 +89,7 @@ const Login = (props) => {
                     
                 </Button>
             </Form>
+            {error && <div>Sign up failed, invalid credentials</div>}
             </Card.Body>
         </Card>
         </Col>
