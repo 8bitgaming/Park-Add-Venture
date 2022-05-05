@@ -6,6 +6,7 @@ import visitedStamp from "../../images/visitedStampRotated.png";
 import "./myParksCard.css";
 
 const MyParksCard = ({ parkName, image, link, visited, dateVisited }) => {
+  console.log("parkname", parkName)
   //   if (!id.length) return <h3>No Parks Saved or Visited</h3>;
 
   //need to add ternary to switch between visited or not visited
