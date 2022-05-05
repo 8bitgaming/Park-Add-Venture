@@ -13,7 +13,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import Donation from "./pages/Donation";
+import Donation from "./components/PayPal";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
