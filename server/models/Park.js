@@ -7,9 +7,6 @@ const parkSchema = new Schema({
     parkName: {
         type: String,
     },
-    description: {
-        type: String,
-    },
     image: {
         type: String,
     },
@@ -18,6 +15,7 @@ const parkSchema = new Schema({
     },
     visited: {
         type: Boolean,
+        default: false
     },
     dateVisited: {
         type: String,
