@@ -21,6 +21,11 @@ body {
 
 .image-container {
     position: relative;
+    width: 100% !important;
+}
+
+.image-container img {
+    width: 100% !important;
 }
 
 .image-container .btn {
