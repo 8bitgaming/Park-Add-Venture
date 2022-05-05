@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import MyParks from "./pages/MyParks";
-import LoginForm from "./pages/Login";
+import Login from "./pages/Login";
 import SignupForm from "./pages/Signup";
 import {
   ApolloClient,
@@ -13,7 +13,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import Donation from "./components/PayPal";
+import Donation from "./pages/Donation";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -43,7 +43,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/myparks" element={<MyParks />} />
-            <Route path="/login" element={<LoginForm />} />
+            <Route path="/Login" element={<Login />} />
             <Route path="/Signup" element={<SignupForm />} />
             <Route path="/donation" element={<Donation />} />
           </Routes>
