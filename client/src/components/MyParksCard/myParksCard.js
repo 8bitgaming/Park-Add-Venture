@@ -11,21 +11,21 @@ const MyParksCard = ({ parkName, image, link, visited, dateVisited }) => {
 
   //need to add ternary to switch between visited or not visited
   return (
-    <Container className="container-fluid d-flex justify-content-center mt-10 my-parks-page">
+    <Container>
       <Row>
-        <Col>
+        <Col className="container-fluid d-flex justify-content-center mt-10 my-parks-page">
           <Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
               src={image}
-              style={{ width: "17.9rem", height: "14rem" }}
+              style={{ width: "100%", height: "14rem" }}
             />
             <Card.Body className="yellow-background">
               <Card.Title className="text-center">{parkName}</Card.Title>
               <Card.Img
                       className="stamp"
                       src={visitedStamp}
-                      style={{ width: "6rem", height: "6rem" }}
+                      style={{ width: "5rem", height: "5rem" }}
                     />
               <Container>
                 <Row>
