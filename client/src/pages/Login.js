@@ -44,12 +44,21 @@ const Login = (props) => {
     };
     return (
         <div className='homepage'>
-        <Col className="container-fluid d-flex justify-content-center">
-        <Card className='yellow-background' style={{ width: "18rem" }}>
+        <Col className="container-fluid d-flex justify-content-center align-items center">
+        <Card 
+        className='yellow-background' 
+        style={{ width: "25rem" }}
+        >
+            <div 
+                    style={{ height: "20rem", width: "100%" }} 
+                    className="d-flex align-items-center justify-content-center"
+                    >
             <Card.Img
             variant="top"
             src={require('../images/login.png')}
+            style={{ width: "60%", height: "60%" }}
             />
+            </div>
             <Card.Body>
             <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
                 <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
