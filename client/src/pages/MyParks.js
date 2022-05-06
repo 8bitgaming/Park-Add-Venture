@@ -15,13 +15,7 @@ const MyParks = () => {
   if (loading) {
     return <div>Page is loading.</div>;
   }
-  console.log("user", user);
-  return !user.length ? (
-    <Container className="container-fluid d-flex justify-content-center mt-10">
-      No parks found. Use the parks page to find your favorites and add them to
-      your list!
-    </Container>
-  ) : (
+  return (
     loggedIn && (
       <div className="my-parks-page">
       <Row
