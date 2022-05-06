@@ -1,7 +1,5 @@
 import Row from "react-bootstrap/Row";
 import MyParksCard from "../components/MyParksCard/myParksCard";
-import Container from "react-bootstrap/Container";
-
 import Auth from "../utils/auth";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_PARKS } from "../utils/queries";
