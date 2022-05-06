@@ -1,5 +1,6 @@
 import Row from "react-bootstrap/Row";
 import MyParksCard from "../components/MyParksCard/myParksCard";
+import Container from "react-bootstrap/Container";
 
 import Auth from "../utils/auth";
 import { useQuery } from "@apollo/client";
@@ -13,7 +14,13 @@ const MyParks = () => {
   if (loading) {
     return <div>Page is loading.</div>;
   }
-  return (
+  console.log("user", user);
+  return !user.length ? (
+    <Container className="container-fluid d-flex justify-content-center mt-10">
+      No parks found. Use the parks page to find your favorites and add them to
+      your list!
+    </Container>
+  ) : (
     loggedIn && (
       <Row
         xs={1}
