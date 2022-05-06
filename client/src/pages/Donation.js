@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import "../pages/homepage.css";
+import "yaml/src/pages/homepage.css";
 import { Card, Col, Button } from "react-bootstrap";
 
 const Donation = () => {
@@ -56,7 +56,7 @@ const Donation = () => {
           <Card className="yellow-background" style={{ width: "25rem" }}>
             <Card.Img
               className="product-img"
-              src={require("../images/Badge.png")}
+              src={require("yaml/src/images/Badge.png")}
               alt="Logo Picture"
             />
             <Card.Body className="">

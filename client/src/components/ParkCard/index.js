@@ -2,9 +2,9 @@ import { Card, Accordion, Col, Container, Row,} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { SAVE_PARK } from "../../utils/mutation";
+import { SAVE_PARK } from "yaml/src/utils/mutation";
 import { useMutation } from "@apollo/client";
-import { QUERY_USER_PARKS } from "../../utils/queries";
+import { QUERY_USER_PARKS } from "yaml/src/utils/queries";
 
 const ParkCard = ({ description, name, states, url, images, id }) => {
   const [savePark] = useMutation(SAVE_PARK, {

@@ -55,3 +55,14 @@ export const SAVE_PARK = gql`
     }
   }
 `;
+
+export const ADD_REVIEW = gql`
+  mutation addReview($reviewText: String!) {
+    addReview(reviewText: $reviewText) {
+      _id
+      reviewText
+      createdAt
+      username
+    }
+  }
+`;

@@ -1,6 +1,6 @@
-import ParkCard from "../components/ParkCard";
+import ParkCard from "yaml/src/components/ParkCard";
 import { useEffect, useReducer, useState } from "react";
-import "./homepage.css";
+import "yaml/src/pages/homepage.css";
 import { Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";

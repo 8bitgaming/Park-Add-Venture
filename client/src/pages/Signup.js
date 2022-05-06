@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert, Card, Col } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { SIGNUP_USER } from '../utils/mutation';
-import Auth from '../utils/auth';
+import { SIGNUP_USER } from 'yaml/src/utils/mutation';
+import Auth from 'yaml/src/utils/auth';
 
 const SignupForm = () => {
     // set initial form state
@@ -64,7 +64,7 @@ const SignupForm = () => {
                     >
                         <Card.Img
                             variant="top"
-                            src={require('../images/signup.png')}
+                            src={require('yaml/src/images/signup.png')}
                             style={{ width: "60%", height: "60%" }}
                             className="pt-10"
                         />

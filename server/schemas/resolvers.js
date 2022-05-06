@@ -1,4 +1,4 @@
-const {User} = require('../models')
+const {User, Review} = require('../models')
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -9,12 +9,20 @@ const resolvers = {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
                     .populate('savedParks')
+                    .populate('reviews');
 
                 return userData;
             }
 
             throw new AuthenticationError('Not logged in');
         },
+        reviews: async (parent, { username }) => {
+            const params = username ? { username } : {};
+            return Review.find(params).sort({ createdAt: -1});
+        },
+        reviews: async (parent, { _id }) => {
+            return Review.findOne({ _id });
+        }
     },
     Mutation: {
         login: async (parent, { username, password }) => {
@@ -73,6 +81,21 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
+        addReview: async (parent, args, context) => {
+            if (context.user) {
+              const review = await Review.create({ ...args, username: context.user.username });
+      
+              await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $push: { reviews: review._id } },
+                { new: true }
+              );
+      
+              return review;
+            }
+      
+            throw new AuthenticationError('You need to be logged in!');
+          },
 
     }
 };
