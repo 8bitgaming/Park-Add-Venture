@@ -26,7 +26,31 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
     },
   });
 
-  const [deletePark] = useMutation(DELETE_PARK);
+  const [removePark] = useMutation(DELETE_PARK, {
+    update(cache, { data: { removePark } }) {
+      try {
+        const { me } = cache.readQuery({ query: QUERY_USER_PARKS });
+        let savedParks = me.savedParks;
+
+        console.log(removePark, id);
+        savedParks = [removePark, ...savedParks];
+        //  me.savedParks = park;
+        console.log(me.savedParks);
+        cache.writeQuery({
+          query: QUERY_USER_PARKS,
+          data: { me },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  });
+
+  const deletePark = (event) => {
+    removePark({
+      variables: { parkId: id },
+    });
+  };
 
   const addPark = (event) => {
     const savedParks = savePark({
@@ -52,8 +76,11 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
             src={images[0].url}
             style={{ width: "17.9rem", height: "14rem" }}
           />
-          <button className="btn btn-no-shadow" onClick={addPark}>
-            <FontAwesomeIcon icon={parkIcon} size="2x" />
+          <button className="btn-add btn-no-shadow" onClick={addPark}>
+            <FontAwesomeIcon icon={faCirclePlus} size="2x" />
+          </button>
+          <button className="btn-remove btn-no-shadow" onClick={deletePark}>
+            <FontAwesomeIcon icon={faCircleCheck} size="2x" />
           </button>
         </div>
         <Card.Body className="yellow-background">

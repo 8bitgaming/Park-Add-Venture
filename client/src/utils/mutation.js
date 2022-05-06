@@ -57,10 +57,11 @@ export const SAVE_PARK = gql`
 `;
 
 export const DELETE_PARK = gql`
-  mutation deletePark(
-      $parkId: String!
-  )
-  deletePark(parkId: $parkId) {
-      
+  mutation RemovePark($parkId: String) {
+    removePark(parkId: $parkId) {
+      savedParks {
+        parkId
+      }
+    }
   }
 `;

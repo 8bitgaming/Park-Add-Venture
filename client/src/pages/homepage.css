@@ -23,9 +23,18 @@ body {
     position: relative;
 }
 
-.image-container .btn {
+.image-container .btn-add {
     position: absolute;
     top: 0;
+    right: 0;
+    color: #411507;
+    stroke: white;
+    stroke-width: 15px;
+}
+
+.image-container .btn-remove {
+    position: absolute;
+    bottom: 0;
     right: 0;
     color: #411507;
     stroke: white;
