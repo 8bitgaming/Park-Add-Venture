@@ -34,10 +34,10 @@ const Header = () => {
               </React.Fragment>
             ) : (
               <React.Fragment>
-              <Nav.Link className="header-links" as={Link} to="/myparks">
+              <Nav.Link key={2} className="header-links" as={Link} to="/myparks">
                 My Parks
               </Nav.Link>
-              <Nav.Link onClick={AuthService.logout}>
+              <Nav.Link key={3} onClick={AuthService.logout}>
                 Logout
               </Nav.Link>
               </React.Fragment>

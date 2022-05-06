@@ -1,13 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
 
-.my-parks-page {
-    background-color: #CAEBF1;
-    font-family: 'Roboto', sans-serif;
-    color: #411507;
-}
-
 .stamp {
     position: absolute;
     left: 65%;
     bottom: 70%;
+}
+
+body {
+    background-color: #CAEBF1;
+    font-family: 'Roboto', sans-serif;
+    color: #411507;
+    width: 100vw !important;
+}
+
+.desktop {
+    display: none;
+}
+
+.mobile {
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.yellow-background, .accordion-button {
+    background-color: #F1B50C;
+}
+
+.image-container {
+    position: relative;
+    width: 100% !important;
+}
+
+.image-container img {
+    width: 100% !important;
+}
+
+.image-container .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #411507;
+    stroke: white;
+    stroke-width: 15px;
+}
+
+.btn-no-shadow:focus {
+    box-shadow: none;
+}
+
+@media only screen and (min-width: 1200px) {
+    .mobile {
+        display: none;
+    }
+
+    .desktop {
+        display: inline;
+    }
+
+    .card-container {
+        margin-left: 2px;
+        margin-right: 2px;
+    }
 }

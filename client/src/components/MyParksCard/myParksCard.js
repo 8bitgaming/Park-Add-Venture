@@ -20,28 +20,31 @@ const MyParksCard = ({ parkName, image, link, visited, dateVisited }) => {
   // }, [state.cart.length, dispatch]);
 
   return (
-    <Container className="container-fluid d-flex justify-content-center mt-10 my-parks-page">
+    <Container>
       <Row>
-        <Col>
+        <Col className="container-fluid d-flex justify-content-center mt-10 my-parks-page">
           <Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
               src={image}
-              style={{ width: "17.9rem", height: "14rem" }}
+              style={{ width: "100%", height: "14rem" }}
             />
             <Card.Body className="yellow-background">
               <Card.Title className="text-center">{parkName}</Card.Title>
-              {visited && (
-                <Card.Img
-                  className="stamp"
-                  src={visitedStamp}
-                  style={{ width: "6rem", height: "6rem" }}
-                />
-              )}
-              <Container className="container-fluid d-flex justify-content-center mt-10">
-                <Button variant="success" onClick={markVisited}>
-                  Visited!
-                </Button>{" "}
+              <Card.Img
+                      className="stamp"
+                      src={visitedStamp}
+                      style={{ width: "5rem", height: "5rem" }}
+                    />
+              <Container>
+                <Row>
+                  <Col>
+                    <Card.Text>Visited on 7/25/2021</Card.Text>
+                  </Col>
+                  <Col>
+                  <Button variant="success">Edit</Button>{" "}
+                  </Col>
+                </Row>
               </Container>
             </Card.Body>
           </Card>

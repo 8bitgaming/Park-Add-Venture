@@ -7,7 +7,7 @@ import auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 
 const Login = (props) => {
-    const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+    const [userFormData, setUserFormData] = useState({ username: '', password: '' });
     // set state for form validation
     const [validated] = useState(false);
     // set state for alert
@@ -38,7 +38,7 @@ const Login = (props) => {
 
         // clear form values
         setUserFormData({
-            email: '',
+            username: '',
             password: '',
         });
     };
@@ -82,13 +82,14 @@ const Login = (props) => {
                 </Form.Group>
                 <Button
                             
-                    enabled={!(userFormData.email && userFormData.password)}
+                    disabled={!(userFormData.username && userFormData.password)}
                     type='submit'
                     variant='success'>
                     Submit
                     
                 </Button>
             </Form>
+            {error && <div>Sign up failed, invalid credentials</div>}
             </Card.Body>
         </Card>
         </Col>

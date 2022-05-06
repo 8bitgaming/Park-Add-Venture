@@ -1,4 +1,4 @@
-import { Card, Accordion, Col } from "react-bootstrap";
+import { Card, Accordion, Col, Container, Row,} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
@@ -41,6 +41,8 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
   };
 
   return (
+    <Container>
+      <Row>
     <Col className="container-fluid d-flex justify-content-center">
       <Card style={{ width: "18rem" }}>
         <div className="image-container">
@@ -77,6 +79,8 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
         </Card.Body>
       </Card>
     </Col>
+    </Row>
+    </Container>
   );
 };
 
