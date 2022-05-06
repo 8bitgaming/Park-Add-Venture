@@ -34,9 +34,9 @@ body {
 
 .image-container .btn-remove {
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: 0;
-    color: #411507;
+    color: #698E1C;
     stroke: white;
     stroke-width: 15px;
 }

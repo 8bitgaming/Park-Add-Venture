@@ -5,9 +5,12 @@ import { useState } from "react";
 import { DELETE_PARK, SAVE_PARK } from "../../utils/mutation";
 import { useMutation } from "@apollo/client";
 import { QUERY_USER_PARKS } from "../../utils/queries";
+import Auth from "../../utils/auth";
 
 const ParkCard = ({ description, name, states, url, images, id }) => {
-  const [parkIcon, setIcon] = useState(faCirclePlus);
+  const loggedIn = Auth.loggedIn();
+
+  const [parkAdded, setParkAdded] = useState(false);
 
   const [savePark] = useMutation(SAVE_PARK, {
     update(cache, { data: { savePark } }) {
@@ -34,7 +37,7 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
 
         console.log(removePark, id);
         savedParks = [removePark, ...savedParks];
-        //  me.savedParks = park;
+        me.savedParks = savedParks;
         console.log(me.savedParks);
         cache.writeQuery({
           query: QUERY_USER_PARKS,
@@ -50,10 +53,11 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
     removePark({
       variables: { parkId: id },
     });
+    setParkAdded(false);
   };
 
   const addPark = (event) => {
-    const savedParks = savePark({
+    savePark({
       variables: {
         parkId: id,
         parkName: name,
@@ -62,9 +66,8 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
       },
     });
 
+    setParkAdded(true);
     console.log(`${id} was added`);
-    setIcon(faCircleCheck);
-    event.target.style.color = "#698E1C";
   };
 
   return (
@@ -76,12 +79,22 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
             src={images[0].url}
             style={{ width: "17.9rem", height: "14rem" }}
           />
-          <button className="btn-add btn-no-shadow" onClick={addPark}>
-            <FontAwesomeIcon icon={faCirclePlus} size="2x" />
-          </button>
-          <button className="btn-remove btn-no-shadow" onClick={deletePark}>
-            <FontAwesomeIcon icon={faCircleCheck} size="2x" />
-          </button>
+          {loggedIn && (
+            <>
+              {!parkAdded ? (
+                <button className="btn btn-add btn-no-shadow" onClick={addPark}>
+                  <FontAwesomeIcon icon={faCirclePlus} size="2x" />
+                </button>
+              ) : (
+                <button
+                  className="btn btn-remove btn-no-shadow"
+                  onClick={deletePark}
+                >
+                  <FontAwesomeIcon icon={faCircleCheck} size="2x" />
+                </button>
+              )}
+            </>
+          )}
         </div>
         <Card.Body className="yellow-background">
           <Accordion flush>
