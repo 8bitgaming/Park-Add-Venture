@@ -35,17 +35,11 @@ body {
     width: 100% !important;
 }
 
-.image-container .btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #411507;
-    stroke: white;
-    stroke-width: 15px;
-}
+.visit-button {
+    background-color: #597C17 ;
+    box-shadow: 0;
+    border: none;
 
-.btn-no-shadow:focus {
-    box-shadow: none;
 }
 
 @media only screen and (min-width: 1200px) {

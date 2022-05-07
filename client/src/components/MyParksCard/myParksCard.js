@@ -1,15 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Container, Row, Col } from "react-bootstrap";
 import visitedStamp from "../../images/visitedStampRotated.png";
 import "./myParksCard.css";
+import { useMutation } from "@apollo/client";
+import { UDPATE_PARK } from "../../utils/mutation";
 
-const MyParksCard = ({ parkName, image, link, visited, dateVisited }) => {
-  console.log("parkname", parkName)
-  //   if (!id.length) return <h3>No Parks Saved or Visited</h3>;
+//on page load, takes params sent from QUERY from myParks component and sets the recordVisit state for the parkID and visit
+const MyParksCard = ({
+  parkId,
+  parkName,
+  image,
+  link,
+  visited,
+  dateVisited,
+}) => {
+  const [recordVisit, setRecordVisit] = useState({
+    parkId: parkId,
+    visited: visited,
+  });
+  //triggerUseEffect is a toggle that is used after the markedVisited function/db change is made to automatically refresh the DOM
+  const [triggerUseEffect, setTriggerUseEffect] = useState();
+  const [updatePark] = useMutation(UDPATE_PARK);
 
-  //need to add ternary to switch between visited or not visited
+  /* markVisited is triggered by the onClick, 
+  visitToggle switches the visit state - so if the park was visited already it would change to not visited and vice versa,
+  the state is then updated with setRecordVisit,
+  updatePark is called to update the db, passing in the new visited value,
+  finally the triggerUseEffect is set, which then causes the useEffect to be triggered and the DOM updated*/
+  const markVisited = async (e) => {
+    let visitToggle = !recordVisit.visited;
+    setRecordVisit({ ...recordVisit, visited: visitToggle });
+    try {
+      await updatePark({
+        variables: { ...recordVisit, visited: visitToggle },
+      });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setTriggerUseEffect(!triggerUseEffect);
+    }
+  };
+
+  useEffect(() => {}, [triggerUseEffect]);
+
+  //recordVisit.visited is checked and if true displays the visited stamp. A ternary is used to change the button text also based on visit status.
   return (
     <Container>
       <Row>
@@ -22,22 +58,25 @@ const MyParksCard = ({ parkName, image, link, visited, dateVisited }) => {
             />
             <Card.Body className="yellow-background">
               <Card.Title className="text-center">{parkName}</Card.Title>
-              <Card.Img
-                      className="stamp"
-                      src={visitedStamp}
-                      style={{ width: "5rem", height: "5rem" }}
-                    />
-              <Container>
-                <Row>
-                  <Col>
-                    <Card.Text>Visited on 7/25/2021</Card.Text>
-                  </Col>
-                  <Col>
-                  <Button variant="success">Edit</Button>{" "}
-                  </Col>
-                </Row>
+              {recordVisit.visited && (
+                <Card.Img
+                  className="stamp"
+                  src={visitedStamp}
+                  style={{ width: "6rem", height: "6rem" }}
+                />
+              )}
+              <Container className="container-fluid d-flex justify-content-center mt-10">
+                <Button
+                  className="visit-button"
+                  variant="success"
+                  value={parkId}
+                  onClick={(e) => markVisited(e.target.value)}
+                >
+                  {recordVisit.visited
+                    ? `Change to not visited`
+                    : `Change to visited`}
+                </Button>{" "}
               </Container>
-
             </Card.Body>
           </Card>
         </Col>
