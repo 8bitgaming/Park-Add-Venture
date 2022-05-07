@@ -29,11 +29,20 @@ body {
     width: 100vw !important;
 }
 
-.image-container .btn {
+.image-container .btn-add {
     position: absolute;
     top: 0;
     right: 0;
     color: #411507;
+    stroke: white;
+    stroke-width: 15px;
+}
+
+.image-container .btn-remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #698E1C;
     stroke: white;
     stroke-width: 15px;
 }

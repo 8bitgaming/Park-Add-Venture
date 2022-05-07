@@ -56,15 +56,27 @@ export const SAVE_PARK = gql`
   }
 `;
 
-export const UDPATE_PARK = gql`
-mutation UpdatePark($parkId: String!, $visited: Boolean, $dateVisited: String) {
-  updatePark(parkId: $parkId, visited: $visited, dateVisited: $dateVisited) {
-    savedParks {
-      visited
-      dateVisited
-      parkName
+export const DELETE_PARK = gql`
+  mutation RemovePark($parkId: String) {
+    removePark(parkId: $parkId) {
+      savedParks {
+        parkId
+      }
     }
   }
-}
 `;
-
+export const UDPATE_PARK = gql`
+  mutation UpdatePark(
+    $parkId: String!
+    $visited: Boolean
+    $dateVisited: String
+  ) {
+    updatePark(parkId: $parkId, visited: $visited, dateVisited: $dateVisited) {
+      savedParks {
+        visited
+        dateVisited
+        parkName
+      }
+    }
+  }
+`;
