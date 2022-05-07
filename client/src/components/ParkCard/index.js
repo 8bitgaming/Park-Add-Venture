@@ -1,12 +1,10 @@
 import { Card, Accordion, Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DELETE_PARK, SAVE_PARK } from "../../utils/mutation";
 import { useMutation } from "@apollo/client";
-import { QUERY_USER_PARKS } from "../../utils/queries";
 import Auth from "../../utils/auth";
-import { useQuery } from "@apollo/client";
 
 const ParkCard = ({
   description,
@@ -18,9 +16,6 @@ const ParkCard = ({
   showCheck,
 }) => {
   const loggedIn = Auth.loggedIn();
-  const { data } = useQuery(QUERY_USER_PARKS);
-  const user = data?.me || [];
-  console.log(showCheck);
 
   const [parkAdded, setParkAdded] = useState(showCheck);
 
