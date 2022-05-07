@@ -6,7 +6,6 @@ import visitedStamp from "../../images/visitedStampRotated.png";
 import "./myParksCard.css";
 import { useMutation } from "@apollo/client";
 import { UDPATE_PARK, DELETE_PARK } from "../../utils/mutation";
-import { QUERY_USER_PARKS } from "../../utils/queries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,14 +17,18 @@ const MyParksCard = ({
   link,
   visited,
   dateVisited,
+  setTriggerLoading,
+  triggerLoading
 }) => {
   const [recordVisit, setRecordVisit] = useState({
     parkId: parkId,
     visited: visited,
   });
+
   //triggerUseEffect is a toggle that is used after the markedVisited function/db change is made to automatically refresh the DOM
   const [triggerUseEffect, setTriggerUseEffect] = useState();
   const [updatePark] = useMutation(UDPATE_PARK);
+  const [removePark] = useMutation(DELETE_PARK)
 
   /* markVisited is triggered by the onClick, 
   visitToggle switches the visit state - so if the park was visited already it would change to not visited and vice versa,
@@ -42,36 +45,26 @@ const MyParksCard = ({
     } catch (e) {
       console.error(e);
     } finally {
+
       setTriggerUseEffect(!triggerUseEffect);
     }
   };
 
-  useEffect(() => {}, [triggerUseEffect]);
-
-  const [removePark] = useMutation(DELETE_PARK, {
-    update(cache, { data: { removePark } }) {
-      try {
-        const { me } = cache.readQuery({ query: QUERY_USER_PARKS });
-        let savedParks = me.savedParks;
-
-        savedParks = [removePark, ...savedParks];
-        me.savedParks = savedParks;
-        console.log(me.savedParks);
-        cache.writeQuery({
-          query: QUERY_USER_PARKS,
-          data: { me },
-        });
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  });
-
   const deletePark = async (event) => {
-    await removePark({
-      variables: { parkId },
-    });
+    try {
+      await removePark({
+        variables: { parkId },
+      });
+    }
+    finally {
+      setTriggerLoading(!triggerLoading)
+      // setTriggerUseEffect(!triggerUseEffect);
+    }
+
   };
+
+  useEffect(() => {
+  }, [triggerUseEffect]);
 
   //recordVisit.visited is checked and if true displays the visited stamp. A ternary is used to change the button text also based on visit status.
   return (
