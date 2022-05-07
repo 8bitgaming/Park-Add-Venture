@@ -1,83 +1,27 @@
 import { Card, Accordion, Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DELETE_PARK, SAVE_PARK } from "../../utils/mutation";
 import { useMutation } from "@apollo/client";
-import { QUERY_USER_PARKS } from "../../utils/queries";
 import Auth from "../../utils/auth";
-import { useQuery } from "@apollo/client";
 
-const ParkCard = ({ description, name, states, url, images, id }) => {
+const ParkCard = ({
+  description,
+  name,
+  states,
+  url,
+  images,
+  id,
+  showCheck,
+}) => {
   const loggedIn = Auth.loggedIn();
-  const { data } = useQuery(QUERY_USER_PARKS);
-  const user = data?.me || [];
-  const [parkAdded, setParkAdded] = useState(false);
 
-  // console.log(`These should be the saved parks ${data.me.savedParks.parkId}`);
-  // user.savedParks.map((park) => {
-  //   console.log(`These are the saved parks ${park.parkId}`);
-  // });
+  const [parkAdded, setParkAdded] = useState(showCheck);
 
-  // useEffect(() => {
-  //   user.savedParks.map((park) =>
-  //     park.parkId === id ? setParkAdded(true) : setParkAdded(false)
-  //   );
-  // }, []);
+  const [savePark] = useMutation(SAVE_PARK);
 
-  // const [parkAdded, setParkAdded] = useState(() => {
-  //   // getting stored value
-  //   const saved = localStorage.getItem(id);
-  //   const initialValue = saved;
-  //   return initialValue || false;
-  // });
-
-  // useEffect(() => {
-  //   const data = localStorage.getItem(id);
-  //   setParkAdded(data);
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem(id, parkAdded);
-  // }, [parkAdded]);
-
-  const [savePark] = useMutation(SAVE_PARK, {
-    update(cache, { data: { savePark } }) {
-      try {
-        const { me } = cache.readQuery({ query: QUERY_USER_PARKS });
-        console.log(`This is me ${me}`);
-        let savedParks = me.savedParks;
-        savedParks = [savePark, ...savedParks];
-        me.savedParks = savedParks;
-        cache.writeQuery({
-          query: QUERY_USER_PARKS,
-          data: { me },
-        });
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  });
-
-  const [removePark] = useMutation(DELETE_PARK, {
-    update(cache, { data: { removePark } }) {
-      try {
-        const { me } = cache.readQuery({ query: QUERY_USER_PARKS });
-        let savedParks = me.savedParks;
-
-        console.log(removePark, id);
-        savedParks = [removePark, ...savedParks];
-        me.savedParks = savedParks;
-        console.log(me.savedParks);
-        cache.writeQuery({
-          query: QUERY_USER_PARKS,
-          data: { me },
-        });
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  });
+  const [removePark] = useMutation(DELETE_PARK);
 
   const deletePark = async (event) => {
     await removePark({
@@ -113,7 +57,7 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
               />
               {loggedIn && (
                 <>
-                  {!parkAdded ? (
+                  {parkAdded === false ? (
                     <button
                       className="btn btn-add btn-no-shadow"
                       onClick={addPark}
