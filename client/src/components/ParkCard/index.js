@@ -1,7 +1,7 @@
 import { Card, Accordion, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DELETE_PARK, SAVE_PARK } from "../../utils/mutation";
 import { useMutation } from "@apollo/client";
 import { QUERY_USER_PARKS } from "../../utils/queries";
@@ -11,6 +11,15 @@ const ParkCard = ({ description, name, states, url, images, id }) => {
   const loggedIn = Auth.loggedIn();
 
   const [parkAdded, setParkAdded] = useState(false);
+
+  // useEffect(() => {
+  //   const data = localStorage.getItem("parkAdded");
+  //   if (data !== null) setParkAdded(data);
+  // }, []);
+
+  useEffect(() => {
+    localStorage.setItem("parkAdded", parkAdded);
+  }, [parkAdded]);
 
   const [savePark] = useMutation(SAVE_PARK, {
     update(cache, { data: { savePark } }) {
