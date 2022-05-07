@@ -7,6 +7,7 @@ import "./myParksCard.css";
 import { useMutation } from "@apollo/client";
 import { UDPATE_PARK } from "../../utils/mutation";
 
+//on page load, takes params sent from QUERY from myParks component and sets the recordVisit state for the parkID and visit
 const MyParksCard = ({
   parkId,
   parkName,
@@ -19,26 +20,32 @@ const MyParksCard = ({
     parkId: parkId,
     visited: visited,
   });
+  //triggerUseEffect is a toggle that is used after the markedVisited function/db change is made to automatically refresh the DOM
+  const [triggerUseEffect, setTriggerUseEffect] = useState();
+  const [updatePark] = useMutation(UDPATE_PARK);
 
-  console.log("visited on load", recordVisit);
-  const [updatePark, { error }] = useMutation(UDPATE_PARK);
-
+  /* markVisited is triggered by the onClick, 
+  visitToggle switches the visit state - so if the park was visited already it would change to not visited and vice versa,
+  the state is then updated with setRecordVisit,
+  updatePark is called to update the db, passing in the new visited value,
+  finally the triggerUseEffect is set, which then causes the useEffect to be triggered and the DOM updated*/
   const markVisited = async (e) => {
-    let visitToggle = !recordVisit.visted
-    console.log("visited after button click", visitToggle);
+    let visitToggle = !recordVisit.visited;
     setRecordVisit({ ...recordVisit, visited: visitToggle });
-    console.log("visited after button click", recordVisit);
     try {
-      const { data } = await updatePark({
-        variables: { ...recordVisit },
+      await updatePark({
+        variables: { ...recordVisit, visited: visitToggle },
       });
     } catch (e) {
       console.error(e);
+    } finally {
+      setTriggerUseEffect(!triggerUseEffect);
     }
   };
 
-  useEffect(() => {}, [recordVisit]);
+  useEffect(() => {}, [triggerUseEffect]);
 
+  //recordVisit.visited is checked and if true displays the visited stamp. A ternary is used to change the button text also based on visit status.
   return (
     <Container>
       <Row>
@@ -58,13 +65,16 @@ const MyParksCard = ({
                   style={{ width: "6rem", height: "6rem" }}
                 />
               )}
-              <Container>
+              <Container className="container-fluid d-flex justify-content-center mt-10">
                 <Button
+                  className="visit-button"
                   variant="success"
                   value={parkId}
                   onClick={(e) => markVisited(e.target.value)}
                 >
-                  {recordVisit.visited ? `I Visited!` : `Will Visit Soon!`}
+                  {recordVisit.visited
+                    ? `Change to not visited`
+                    : `Change to visited`}
                 </Button>{" "}
               </Container>
             </Card.Body>
