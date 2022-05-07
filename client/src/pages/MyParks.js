@@ -21,7 +21,7 @@ const MyParks = () => {
     return <div>Page is loading.</div>;
   }
 
-  return !user.length ? (
+  return !user.savedParks.length ? (
     <Container>No parks added. Use the parks page to add some parks to visit!</Container>
   ) : (
     loggedIn && (
