@@ -56,6 +56,7 @@ export const SAVE_PARK = gql`
   }
 `;
 
+<<<<<<< HEAD
 export const DELETE_PARK = gql`
   mutation RemovePark($parkId: String) {
     removePark(parkId: $parkId) {
@@ -65,3 +66,17 @@ export const DELETE_PARK = gql`
     }
   }
 `;
+=======
+export const UDPATE_PARK = gql`
+mutation UpdatePark($parkId: String!, $visited: Boolean, $dateVisited: String) {
+  updatePark(parkId: $parkId, visited: $visited, dateVisited: $dateVisited) {
+    savedParks {
+      visited
+      dateVisited
+      parkName
+    }
+  }
+}
+`;
+
+>>>>>>> d6d2a509d036c54dbdc4ca3fc24072925d9b28df
