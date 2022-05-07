@@ -9,12 +9,13 @@ import React, { useEffect, useState } from "react";
 
 const MyParks = () => {
   const loggedIn = Auth.loggedIn();
-  const { loading, data } = useQuery(QUERY_USER_PARKS);
+  const { loading, data, refetch } = useQuery(QUERY_USER_PARKS);
   const user = data?.me || [];
   const [triggerLoading, setTriggerLoading] = useState(user)
 
   useEffect(() => {
     console.log("useEffect from MyParks Triggered", triggerLoading)
+    refetch()
 
   }, [triggerLoading]);
 
