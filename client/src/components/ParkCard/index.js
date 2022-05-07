@@ -6,25 +6,45 @@ import { DELETE_PARK, SAVE_PARK } from "../../utils/mutation";
 import { useMutation } from "@apollo/client";
 import { QUERY_USER_PARKS } from "../../utils/queries";
 import Auth from "../../utils/auth";
+import { useQuery } from "@apollo/client";
 
 const ParkCard = ({ description, name, states, url, images, id }) => {
   const loggedIn = Auth.loggedIn();
-
   const [parkAdded, setParkAdded] = useState(false);
-
-  // useEffect(() => {
-  //   const data = localStorage.getItem("parkAdded");
-  //   if (data !== null) setParkAdded(data);
-  // }, []);
+  const { data } = useQuery(QUERY_USER_PARKS);
+  const user = data?.me || [];
+  // console.log(`These should be the saved parks ${data.me.savedParks.parkId}`);
+  // user.savedParks.map((park) => {
+  //   console.log(`These are the saved parks ${park.parkId}`);
+  // });
 
   useEffect(() => {
-    localStorage.setItem("parkAdded", parkAdded);
-  }, [parkAdded]);
+    user.savedParks.map((park) =>
+      park.parkId === id ? setParkAdded(true) : setParkAdded(false)
+    );
+  }, []);
+
+  // const [parkAdded, setParkAdded] = useState(() => {
+  //   // getting stored value
+  //   const saved = localStorage.getItem(id);
+  //   const initialValue = saved;
+  //   return initialValue || false;
+  // });
+
+  // useEffect(() => {
+  //   const data = localStorage.getItem(id);
+  //   setParkAdded(data);
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem(id, parkAdded);
+  // }, [parkAdded]);
 
   const [savePark] = useMutation(SAVE_PARK, {
     update(cache, { data: { savePark } }) {
       try {
         const { me } = cache.readQuery({ query: QUERY_USER_PARKS });
+        console.log(`This is me ${me}`);
         let savedParks = me.savedParks;
         savedParks = [savePark, ...savedParks];
         me.savedParks = savedParks;
