@@ -6,7 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_PARKS } from "../utils/queries";
+import Auth from "../utils/auth";
+
 const Homepage = () => {
+  const loggedIn = Auth.loggedIn();
   const [parks, setParks] = useState([]);
   const url = `https://developer.nps.gov/api/v1/parks?&limit=466&api_key=${process.env.REACT_APP_API_KEY}`;
   useEffect(() => {
@@ -54,14 +57,17 @@ const Homepage = () => {
         {nationalParks
           .filter((park) => park.name.toLowerCase().includes(query))
           .map((park) => {
-            let showCheck = false;
-            if (
-              user.savedParks.find((parkId) => parkId.parkId === park.id) !==
-              undefined
-            ) {
-              showCheck = true;
+            if (loggedIn) {
+              let showCheck = false;
+              if (
+                user.savedParks.find((parkId) => parkId.parkId === park.id) !==
+                undefined
+              ) {
+                showCheck = true;
+              }
+              return <ParkCard key={park.id} {...park} showCheck={showCheck} />;
             }
-            return <ParkCard key={park.id} {...park} showCheck={showCheck} />;
+            return <ParkCard key={park.id} {...park} showCheck={false} />;
           })}
       </Row>
     </div>
