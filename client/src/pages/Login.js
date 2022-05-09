@@ -65,7 +65,7 @@ const Login = (props) => {
                     Something went wrong with your login credentials!
                 </Alert>
                 <Form.Group>
-                    <Form.Label htmlFor='username'>username</Form.Label>
+                    <Form.Label htmlFor='username'>Username</Form.Label>
                     <Form.Control
                         type='text'
                         placeholder='Your username'
