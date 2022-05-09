@@ -5,7 +5,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import visitedStamp from "../../images/visitedStampRotated.png";
 import "./myParksCard.css";
 import { useMutation } from "@apollo/client";
-import { UDPATE_PARK } from "../../utils/mutation";
+import { UDPATE_PARK, DELETE_PARK } from "../../utils/mutation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 //on page load, takes params sent from QUERY from myParks component and sets the recordVisit state for the parkID and visit
 const MyParksCard = ({
@@ -15,14 +17,18 @@ const MyParksCard = ({
   link,
   visited,
   dateVisited,
+  setTriggerLoading,
+  triggerLoading
 }) => {
   const [recordVisit, setRecordVisit] = useState({
     parkId: parkId,
     visited: visited,
   });
+
   //triggerUseEffect is a toggle that is used after the markedVisited function/db change is made to automatically refresh the DOM
   const [triggerUseEffect, setTriggerUseEffect] = useState();
   const [updatePark] = useMutation(UDPATE_PARK);
+  const [removePark] = useMutation(DELETE_PARK)
 
   /* markVisited is triggered by the onClick, 
   visitToggle switches the visit state - so if the park was visited already it would change to not visited and vice versa,
@@ -39,11 +45,26 @@ const MyParksCard = ({
     } catch (e) {
       console.error(e);
     } finally {
+
       setTriggerUseEffect(!triggerUseEffect);
     }
   };
 
-  useEffect(() => {}, [triggerUseEffect]);
+  const deletePark = async (event) => {
+    try {
+      await removePark({
+        variables: { parkId },
+      });
+    }
+    finally {
+      setTriggerLoading(!triggerLoading)
+      // setTriggerUseEffect(!triggerUseEffect);
+    }
+
+  };
+
+  useEffect(() => {
+  }, [triggerUseEffect]);
 
   //recordVisit.visited is checked and if true displays the visited stamp. A ternary is used to change the button text also based on visit status.
   return (
@@ -76,6 +97,12 @@ const MyParksCard = ({
                     ? `Change to not visited`
                     : `Change to visited`}
                 </Button>{" "}
+                <button
+                  className="btn btn-remove btn-no-shadow"
+                  onClick={deletePark}
+                >
+                  <FontAwesomeIcon icon={faTrash} size="2x" />
+                </button>
               </Container>
             </Card.Body>
           </Card>
